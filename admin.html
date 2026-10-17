@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Owner Panel – Manage Medicines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Gurmukhi:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-title-key="admin.title">
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff"><path d="M10 3h4v7h7v4h-7v7h-4v-7H3v-4h7z"/></svg></span>
+      <span class="brand-name">NEW SHIV MEDICAL HALL</span>
+    </a>
+    <a class="btn btn-ghost btn-small" href="index.html" style="margin-left:auto" data-i18n="admin.back">Back to website</a>
+    <div class="lang-switch" role="group" data-i18n-aria="lang.label" aria-label="Language">
+      <button type="button" class="lang-btn active" data-lang="en" lang="en" aria-pressed="true">English</button>
+      <button type="button" class="lang-btn" data-lang="hi" lang="hi" aria-pressed="false">हिन्दी</button>
+      <button type="button" class="lang-btn" data-lang="pa" lang="pa" aria-pressed="false">ਪੰਜਾਬੀ</button>
+    </div>
+  </div>
+</header>
+
+<main class="container admin-wrap">
+  <h1 class="section-title" data-i18n="admin.title" style="margin-bottom:24px">Owner Panel – Manage Medicines</h1>
+
+  <!-- Setup -->
+  <section class="admin-card" id="setupCard">
+    <h2 data-i18n="admin.setup">One-time Setup</h2>
+    <p class="help" data-i18n="admin.setupHelp"></p>
+    <form class="admin-form" id="setupForm" autocomplete="off">
+      <div class="row">
+        <div><label for="gOwner" data-i18n="admin.owner">GitHub username</label><input id="gOwner" required></div>
+        <div><label for="gRepo" data-i18n="admin.repo">Repository name</label><input id="gRepo" required></div>
+      </div>
+      <div class="row">
+        <div><label for="gBranch" data-i18n="admin.branch">Branch</label><input id="gBranch" value="main" required></div>
+        <div><label for="gToken" data-i18n="admin.token">Access token</label><input id="gToken" type="password" required></div>
+      </div>
+      <p class="help" data-i18n="admin.tokenHelp"></p>
+      <div class="admin-actions">
+        <button class="btn btn-primary" type="submit" data-i18n="admin.connect">Save & Connect</button>
+      </div>
+      <p class="msg" id="setupMsg" role="status"></p>
+    </form>
+  </section>
+
+  <!-- Manager -->
+  <div id="managerArea" class="hidden">
+    <section class="admin-card">
+      <h2 data-i18n="admin.add">Add / Edit Item</h2>
+      <form class="admin-form" id="itemForm">
+        <div class="row">
+          <div><label for="iName" data-i18n="admin.name">Medicine name</label><input id="iName" maxlength="120"></div>
+          <div><label for="iPrice" data-i18n="admin.price">Price (₹)</label><input id="iPrice" type="number" min="0" step="0.5" inputmode="decimal"></div>
+        </div>
+        <div class="row">
+          <div><label for="iCat" data-i18n="admin.category">Category</label><select id="iCat"></select></div>
+          <div><label for="iStock" data-i18n="admin.availability">Availability</label>
+            <select id="iStock"><option value="1" data-i18n="prod.instock">In Stock</option><option value="0" data-i18n="prod.outstock">Out of Stock</option></select></div>
+        </div>
+        <label for="iDesc" data-i18n="admin.desc">Details (optional)</label>
+        <textarea id="iDesc" rows="2" maxlength="200"></textarea>
+        <label for="iPhoto" data-i18n="admin.photo">Photo of medicine</label>
+        <input id="iPhoto" type="file" accept="image/*">
+        <p class="help hidden" id="keepPhoto" data-i18n="admin.keepPhoto"></p>
+        <img class="preview hidden" id="preview" alt="">
+        <div class="admin-actions">
+          <button class="btn btn-primary" type="submit" id="saveBtn" data-i18n="admin.save">Save Item</button>
+          <button class="btn btn-ghost hidden" type="button" id="cancelBtn" data-i18n="admin.cancel">Cancel edit</button>
+        </div>
+        <p class="msg" id="itemMsg" role="status"></p>
+      </form>
+    </section>
+
+    <section class="admin-card">
+      <h2 data-i18n="admin.list">Your Items</h2>
+      <div id="itemList"></div>
+      <div class="admin-actions">
+        <button class="btn btn-ghost btn-small" type="button" id="exportBtn" data-i18n="admin.export">Download backup</button>
+        <button class="btn btn-ghost btn-small" type="button" id="disconnectBtn" data-i18n="admin.disconnect">Disconnect</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="i18n.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
